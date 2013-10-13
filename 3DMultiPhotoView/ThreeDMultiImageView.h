@@ -8,7 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ThreeDMultiImageViewDelegate;
+
 @interface ThreeDMultiImageView : UIView
+
+@property (nonatomic, assign) id<ThreeDMultiImageViewDelegate> delegate;
 
 @property (nonatomic, assign) NSUInteger selectedImgIndex;
 @property (nonatomic, strong) NSArray *images;
@@ -16,5 +20,13 @@
 
 @property (nonatomic, assign) float perspectiveDistance;
 @property (nonatomic, assign) float viewAngle;
+
+@end
+
+
+@protocol ThreeDMultiImageViewDelegate <NSObject>
+
+@optional
+- (void)threeDMultiImageView:(ThreeDMultiImageView *)iv didSelectedImage:(UIImage *)image;
 
 @end

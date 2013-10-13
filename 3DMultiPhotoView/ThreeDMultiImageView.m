@@ -29,10 +29,10 @@
 @property (nonatomic, assign) CATransform3D fov;
 @property (nonatomic, assign) CATransform3D angle;
 
+@property (nonatomic, assign) NSInteger imagePosition;
 @end
 
 @implementation ThreeDMultiImageView
-
 
 #pragma mark - Life Cycle
 - (id)initWithFrame:(CGRect)frame
@@ -66,7 +66,7 @@
 {
     _images = images;
     
-    self.selectedImgIndex = (NSUInteger)(images.count / 2);
+    self.imagePosition = (NSUInteger)(images.count / 2);
     
     [self updateImageViews];
 }
@@ -78,13 +78,19 @@
     [self setupLayers];
 }
 
-- (void)setSelectedImgIndex:(NSUInteger)selectedImgIndex
+- (void)setImagePosition:(NSInteger)imagePosition
 {
-    int direction = selectedImgIndex - _selectedImgIndex;
-    _selectedImgIndex = selectedImgIndex;
-
-    float imageRad = -(ANG_TO_RAD(45.0 * direction));
+    int direction = imagePosition - _imagePosition;
+    _imagePosition = imagePosition;
+    int temp = _imagePosition % 8;
+    if (temp < 0)
+    {
+        temp += 8;
+    }
+    _selectedImgIndex = temp;
     
+    float imageRad = -(ANG_TO_RAD(45.0 * direction));
+
     [CATransaction begin];
     
     [CATransaction setValue:[NSNumber numberWithFloat:0.3f]
@@ -94,6 +100,14 @@
     self.viewAngle += imageRad;
     
     [CATransaction commit];
+}
+
+- (void)setSelectedImgIndex:(NSUInteger)selectedImgIndex
+{
+    int delta = selectedImgIndex - (_imagePosition % 8);
+    self.imagePosition += delta;
+    
+    _selectedImgIndex = selectedImgIndex;
 }
 
 - (void)setPerspectiveDistance:(float)perspectiveDistance
@@ -121,7 +135,6 @@
     _rootLayer = [CALayer layer];
     _rootLayer.backgroundColor = [UIColor lightGrayColor].CGColor;
     _rootLayer.frame = self.bounds;
-//    _rootLayer.position = CGPointMake(100, 100);
     
     if (_octaLayers)
     {
@@ -277,7 +290,6 @@
     [self updateImageViews];
 }
 
-//Trackball Version by Bill Dudney
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	CGPoint location = [[touches anyObject] locationInView:self];
@@ -294,7 +306,6 @@
     float radian = atan2f(distance, radius);
     
     _deltaRadian = radian;
-    NSLog(@"delta radian = %f", radian);
     
     _temp = CATransform3DRotate(_angle, radian, 0.0f, 1.0f, 0.0f);
     _rootLayer.sublayerTransform = CATransform3DConcat(_temp, _fov);
@@ -302,18 +313,31 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if (_deltaRadian > 0.35f && self.selectedImgIndex > 0)
+    if (_deltaRadian == 0.0)
     {
-        self.selectedImgIndex = self.selectedImgIndex - 1;
+        if([_delegate respondsToSelector:@selector(threeDMultiImageView:didSelectedImage:)])
+        {
+            [_delegate threeDMultiImageView:self didSelectedImage:_images[_selectedImgIndex]];
+        }
+        return;
     }
-    else if(_deltaRadian < -0.35f && self.selectedImgIndex < _images.count - 1)
+    
+    if (_deltaRadian > 0.35f &&
+        (self.imagePosition > 0 || _images.count == 8))
     {
-        self.selectedImgIndex = self.selectedImgIndex + 1;
+        self.imagePosition = _imagePosition - 1;
+    }
+    else if(_deltaRadian < -0.35f &&
+            (self.imagePosition < _images.count - 1 || _images.count == 8))
+    {
+        self.imagePosition = _imagePosition + 1;
     }
     else
     {
-        self.selectedImgIndex = self.selectedImgIndex;
+        self.imagePosition = _imagePosition;
     }
+    
+    _deltaRadian = 0.0;
 }
 
 /*
@@ -334,13 +358,11 @@
     
     if (areaRatio < 0)
     {
-        // 가로가 김
         croppedArea.size.width = target.size.width;
         croppedArea.size.height = MIN(target.size.width * areaRatio, target.size.height);
     }
     else
     {
-        // 세로가 김
         croppedArea.size.width = MIN(target.size.height * areaRatio, target.size.width);
         croppedArea.size.height = target.size.height;
     }

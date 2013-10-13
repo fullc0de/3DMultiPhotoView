@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		DABB7BCC17FD7725009B3119 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DABB7BCB17FD7725009B3119 /* QuartzCore.framework */; };
+		DAC31B86180AEBA4004D16CD /* IMG_7838.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC31B83180AEBA4004D16CD /* IMG_7838.jpg */; };
+		DAC31B87180AEBA4004D16CD /* IMG_7836.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC31B84180AEBA4004D16CD /* IMG_7836.jpg */; };
+		DAC31B88180AEBA4004D16CD /* IMG_7839.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DAC31B85180AEBA4004D16CD /* IMG_7839.jpg */; };
 		DACA39E917FAFD2E000D6617 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACA39E817FAFD2E000D6617 /* Foundation.framework */; };
 		DACA39EB17FAFD2E000D6617 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACA39EA17FAFD2E000D6617 /* CoreGraphics.framework */; };
 		DACA39ED17FAFD2E000D6617 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DACA39EC17FAFD2E000D6617 /* UIKit.framework */; };
@@ -42,6 +45,9 @@
 
 /* Begin PBXFileReference section */
 		DABB7BCB17FD7725009B3119 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		DAC31B83180AEBA4004D16CD /* IMG_7838.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_7838.jpg; sourceTree = "<group>"; };
+		DAC31B84180AEBA4004D16CD /* IMG_7836.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_7836.jpg; sourceTree = "<group>"; };
+		DAC31B85180AEBA4004D16CD /* IMG_7839.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = IMG_7839.jpg; sourceTree = "<group>"; };
 		DACA39E517FAFD2E000D6617 /* 3DMultiPhotoView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 3DMultiPhotoView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DACA39E817FAFD2E000D6617 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DACA39EA17FAFD2E000D6617 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,6 +140,9 @@
 				DACA3A3017FB2CA7000D6617 /* IMG_7828.jpg */,
 				DACA3A3117FB2CA7000D6617 /* IMG_7823.jpg */,
 				DACA3A3217FB2CA7000D6617 /* IMG_7824.jpg */,
+				DAC31B83180AEBA4004D16CD /* IMG_7838.jpg */,
+				DAC31B84180AEBA4004D16CD /* IMG_7836.jpg */,
+				DAC31B85180AEBA4004D16CD /* IMG_7839.jpg */,
 				DACA3A2017FAFE01000D6617 /* ThreeDMultiImageView.h */,
 				DACA3A2117FAFE01000D6617 /* ThreeDMultiImageView.m */,
 				DACA39F717FAFD2E000D6617 /* AppDelegate.h */,
@@ -260,6 +269,9 @@
 				DACA39FC17FAFD2E000D6617 /* Main.storyboard in Resources */,
 				DACA3A3617FB2CA7000D6617 /* IMG_7823.jpg in Resources */,
 				DACA3A3417FB2CA7000D6617 /* IMG_7826.jpg in Resources */,
+				DAC31B88180AEBA4004D16CD /* IMG_7839.jpg in Resources */,
+				DAC31B86180AEBA4004D16CD /* IMG_7838.jpg in Resources */,
+				DAC31B87180AEBA4004D16CD /* IMG_7836.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
